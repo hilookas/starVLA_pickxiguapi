@@ -41,7 +41,7 @@ def main(args) -> None:
 
 def build_argparser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--ckpt_path", type=str, default="Qwen/Qwen2.5-VL-3B-Instruct")
+    parser.add_argument("--ckpt_path", type=str, default="/mnt/20T/yyf/Checkpoints/Qwen-GR00T-Bridge/checkpoints/steps_45000_pytorch_model.pt")
     parser.add_argument("--port", type=int, default=10093)
     parser.add_argument("--use_bf16", action="store_true")
     return parser
@@ -62,7 +62,7 @@ if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, force=True)
     parser = build_argparser()
     args = parser.parse_args()
-    if os.getenv("DEBUG", False):
-        print("🔍 DEBUGPY is enabled")
-        start_debugpy_once()
+    # if os.getenv("DEBUG", False):
+    #     print("🔍 DEBUGPY is enabled")
+    #     start_debugpy_once()
     main(args)

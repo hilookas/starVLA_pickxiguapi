@@ -2,17 +2,17 @@
 
 echo `which python`
 
-export SimplerEnv_PATH=~/Projects/SimplerEnv
-export PYTHONPATH=~/Envs/miniconda3/envs/dinoact:${PYTHONPATH}
-export PYTHONPATH=$(pwd):${PYTHONPATH}
+export SimplerEnv_PATH=/home/chq/SimplerEnv-SOFAR/
+# export PYTHONPATH=~/Envs/miniconda3/envs/dinoact:${PYTHONPATH}
+# export PYTHONPATH=$(pwd):${PYTHONPATH}
 
-MODEL_PATH=./results/Checkpoints/1003_qwenoft/checkpoints/steps_100000_pytorch_model.pt
-# MODEL_PATH=$1
+MODEL_PATH=/mnt/20T/yyf/Checkpoints/1018_starvla_qwenfm_bridge_downloaded/checkpoints/steps_40000_pytorch_model.pt
 ckpt_path=${MODEL_PATH}
-TSET_NUM=1
-# DEBUG=1
+TSET_NUM=4
 
-port=5678
+port=10093  # 必须与 server_policy.py 的端口一致
+
+export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-0,1,2,3}
 
 IFS=',' read -r -a CUDA_DEVICES <<< "$CUDA_VISIBLE_DEVICES"
 NUM_GPUS=${#CUDA_DEVICES[@]} 
@@ -32,8 +32,6 @@ declare -a ENV_NAMES=(
   PutCarrotOnPlateInScene-v0
   PutSpoonOnTableClothInScene-v0
 )
-
-
 
 for i in "${!ENV_NAMES[@]}"; do
   env="${ENV_NAMES[i]}"
@@ -76,7 +74,7 @@ for i in "${!ENV_NAMES_V2[@]}"; do
   for ((run_idx=1; run_idx<=TSET_NUM; run_idx++)); do
     echo "▶️ Launching V2 task [${env}] run#${run_idx} on GPU $gpu_id, log → ${task_log}"
 
-    CUDA_VISIBLE_DEVICES=0 python examples/SimplerEnv/start_simpler_env.py \
+    python examples/SimplerEnv/start_simpler_env.py \
       --ckpt-path ${ckpt_path} \
       --port ${port} \
       --robot ${robot} \
@@ -96,4 +94,4 @@ for i in "${!ENV_NAMES_V2[@]}"; do
   done
 done
 
-# echo "✅ Finished"
+echo "✅ Finished"

@@ -153,6 +153,7 @@ cache/
 data/
 playground/Models
 =4.43.2
+=0.17.0
 
 # temp
 playground/BuildData
@@ -164,6 +165,7 @@ playground/Datasets
 eval/SimplerEnv
 
 results
+results2
 nohup.out
 *.out
 length_distribution.png
@@ -212,3 +214,6 @@ examples/SimplerEnv/eval_scripts
 starVLA/config/frameworks/*
 starVLA/model/modules/sam_model/*
 assets/SAMv2.txt
+
+# Custom scripts to ignore
+download_from_hf.py

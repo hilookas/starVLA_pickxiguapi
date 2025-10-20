@@ -6,8 +6,9 @@ import asyncio
 import logging
 import traceback
 
-import websockets.asyncio.server
+import websockets.server
 import websockets.frames
+from websockets.server import serve
 
 # from openpi_client import base_policy as _base_policy
 from . import msgpack_numpy
@@ -36,7 +37,7 @@ class WebsocketPolicyServer:
         asyncio.run(self.run())
 
     async def run(self):
-        async with websockets.asyncio.server.serve(
+        async with serve(
             self._handler,
             self._host,
             self._port,
@@ -45,7 +46,7 @@ class WebsocketPolicyServer:
         ) as server:
             await server.serve_forever()
 
-    async def _handler(self, websocket: websockets.asyncio.server.ServerConnection):
+    async def _handler(self, websocket):
         logging.info(f"Connection from {websocket.remote_address} opened")
         packer = msgpack_numpy.Packer()
 

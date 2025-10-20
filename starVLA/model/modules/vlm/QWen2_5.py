@@ -84,6 +84,11 @@ class _QWen_VL_Interface(nn.Module):
 
         qwenvl_config = config.framework.get("qwenvl", {})
         model_id = qwenvl_config.get("base_vlm", "Qwen/Qwen2.5-VL-3B-Instruct")
+        
+        # Convert relative local paths to absolute paths for huggingface_hub compatibility
+        import os
+        if os.path.exists(model_id) or model_id.startswith('./') or model_id.startswith('../'):
+            model_id = os.path.abspath(model_id)
 
         model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
             model_id,
