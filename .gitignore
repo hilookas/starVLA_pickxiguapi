@@ -217,3 +217,5 @@ assets/SAMv2.txt
 
 # Custom scripts to ignore
 download_from_hf.py
+
+playground/*
