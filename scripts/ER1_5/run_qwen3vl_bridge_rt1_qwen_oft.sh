@@ -5,11 +5,12 @@ data_mix=bridge_rt_1
 
 ## Modify below paths before running ##
 date_time=$(date +%m%d_%H%M)
+config_yaml=scripts/ER1_5/qwen3vl_bridge_rt1_oft.yaml
 base_vlm=/apdcephfs_hldy/share_304012692/er1/Qwen3-VL-8B-Instruct # local path of VLM
-data_root_dir=./playground/Datasets/ # local path of dataset root
+data_root_dir=./playground/Datasets/OXE_LEROBOT # local path of dataset root
 run_root_dir=/apdcephfs_hldy/share_304012692/Checkpoints # output root path
 run_id=qwen3vl_bridge_rt1_oft_${date_time} # run id
-batch_size=32
+batch_size=8
 wandb_project=Qwen3VL_Bridge_RT1_OFT
 wandb_entity=your_wandb_entity # set your wandb entity here
 
@@ -25,7 +26,7 @@ accelerate launch \
   --config_file starVLA/config/deepseeds/deepspeed_zero2.yaml \
   --num_processes 8 \
   starVLA/training/train_starvla.py \
-  --config_yaml ./starVLA/config/training/qwen3vl_bridge_rt1_oft.yaml \
+  --config_yaml ${config_yaml} \
   --framework.name ${Framework_name} \
   --framework.qwenvl.base_vlm ${base_vlm} \
   --datasets.vla_data.data_root_dir ${data_root_dir}\
