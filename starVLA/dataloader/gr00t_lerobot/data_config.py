@@ -6,20 +6,17 @@
 from abc import ABC, abstractmethod
 
 from starVLA.dataloader.gr00t_lerobot.datasets import ModalityConfig
-from starVLA.dataloader.gr00t_lerobot.transform.base import ComposedModalityTransform, ModalityTransform
+from starVLA.dataloader.gr00t_lerobot.transform.base import (
+    ComposedModalityTransform, ModalityTransform)
 from starVLA.dataloader.gr00t_lerobot.transform.concat import ConcatTransform
 from starVLA.dataloader.gr00t_lerobot.transform.state_action import (
-    StateActionSinCosTransform,
-    StateActionToTensor,
-    StateActionTransform,
-)
-from starVLA.dataloader.gr00t_lerobot.transform.video import (
-    VideoColorJitter,
-    VideoCrop,
-    VideoResize,
-    VideoToNumpy,
-    VideoToTensor,
-)
+    StateActionSinCosTransform, StateActionToTensor, StateActionTransform)
+from starVLA.dataloader.gr00t_lerobot.transform.video import (VideoColorJitter,
+                                                              VideoCrop,
+                                                              VideoResize,
+                                                              VideoToNumpy,
+                                                              VideoToTensor)
+
 # from gr00t.model.transforms import GR00TTransform
 
 
@@ -437,7 +434,7 @@ class SingleFrankaRobotiqDeltaEefDataConfig:
 
 class Libero4in1DataConfig:
     video_keys = [
-        "video.image",
+        "video.primary_image",
         "video.wrist_image",
     ]
     
@@ -918,4 +915,3 @@ ROBOT_TYPE_CONFIG_MAP = {
     
     "custom_robot_config": SingleFrankaRobotiqDeltaEefDataConfig(),
 }
-
