@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # === Please modify the following paths according to your environment ===
-Framework_name=QwenGR00T
+Framework_name=QwenOFT
 freeze_module_list=''
 date_time=$(date +%m%d_%H%M)
 base_vlm=/home/tiger/.cache/huggingface/hub/models--Qwen--Qwen3-VL-8B-Instruct/snapshots/0c351dd01ed87e9c1b53cbc748cba10e6187ff3b
-config_yaml=scripts/ER1_5/qwen3vl_libero.yaml
+config_yaml=scripts/ER1_5/qwen3vl_bridge_rt1_oft.yaml
 libero_data_root=./playground/Datasets/LEROBOT_LIBERO_DATA
 data_mix=libero_all
-run_root_dir=./Checkpoints
+run_root_dir=./Checkpoints # output root path
 run_id=libero4in1_${Framework_name}_${date_time}
 batch_size=8
 wandb_project=Qwen3VL_libero_all_${Framework_name}

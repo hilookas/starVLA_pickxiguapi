@@ -51,7 +51,7 @@ dependencies = [
     "tensorboard>=2.20.0",
     "tiktoken>=0.12.0",
     "timm>=1.0.22",
-    "torchvision==0.21.0",
+    "torchvision",
     "transformers==4.57.3",
     "transformers-stream-generator==0.0.4",
     "tyro>=1.0.3",
@@ -59,6 +59,11 @@ dependencies = [
     "websocket>=0.2.1",
     "websocket-client==1.8.0",
     "websockets>=15.0.1",
+    "torch==2.5.1",
+    "flash-attn>=2.8.3",
+    "libero",
+    "debugpy>=1.8.19",
+    "ipdb>=0.13.13",
 ]
 
 [project.optional-dependencies]
@@ -116,3 +121,14 @@ ignore = ["F722"]
 
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F401"]
+
+[tool.uv.extra-build-dependencies]
+flash-attn = ["torch==2.5.1"]
+
+[tool.uv.workspace]
+members = [
+    "LIBERO",
+]
+
+[tool.uv.sources]
+libero = { workspace = true }

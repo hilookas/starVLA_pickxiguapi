@@ -6,23 +6,22 @@ data_mix=bridge_rt_1
 ## Modify below paths before running ##
 date_time=$(date +%m%d_%H%M)
 config_yaml=scripts/ER1_5/qwen3vl_bridge_rt1_gr00t.yaml
-base_vlm=/apdcephfs_hldy/share_304012692/er1/Qwen3-VL-8B-Instruct # local path of VLM
+base_vlm=/home/tiger/.cache/huggingface/hub/models--Qwen--Qwen3-VL-8B-Instruct/snapshots/0c351dd01ed87e9c1b53cbc748cba10e6187ff3b
 data_root_dir=./playground/Datasets/OXE_LEROBOT # local path of dataset root
-run_root_dir=/apdcephfs_hldy/share_304012692/Checkpoints # output root path
-run_id=qwen3vl_bridge_rt1_gr00t_${date_time} # run id
+run_root_dir=./Checkpoints
+run_id=qwen3vl_bridge_rt1_${Framework_name}_${date_time} # run id
 batch_size=8
-wandb_project=Qwen3VL_Bridge_RT1_GR00T
-wandb_entity=your_wandb_entity # set your wandb entity here
+wandb_project=Qwen3VL_Bridge_RT1_${Framework_name}
+wandb_entity=lookas
 
-export WANDB_MODE=disabled
+# export WANDB_MODE=disabled
 
 output_dir=${run_root_dir}/${run_id}
 mkdir -p ${output_dir}
 cp $0 ${output_dir}/
 
 
-accelerate launch \
-  --main_process_port 29503 \
+accelerate launch --main_process_port 12773 \
   --config_file starVLA/config/deepseeds/deepspeed_zero2.yaml \
   --num_processes 8 \
   starVLA/training/train_starvla.py \
