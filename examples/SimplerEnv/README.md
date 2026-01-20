@@ -1,18 +1,18 @@
-This document provides instructions for reproducing our **experimental results** with SimplerEnv.  
+This document provides instructions for reproducing our **experimental results** with SimplerEnv.
 
 
-The evaluation process consists of two main parts:  
+The evaluation process consists of two main parts:
 
-1. Setting up the `simpler_env` environment and dependencies.  
-2. Running the evaluation by launching services in both `starVLA` and `simpler_env` environments.  
+1. Setting up the `simpler_env` environment and dependencies.
+2. Running the evaluation by launching services in both `starVLA` and `simpler_env` environments.
 
-We have verified that this workflow runs successfully on both **NVIDIA A100** and **RTX 4090** GPUs.  
+We have verified that this workflow runs successfully on both **NVIDIA A100** and **RTX 4090** GPUs.
 
 ## 📦 1. Environment Setup
 
-To set up the environment, please first follow the official [SimplerEnv repository](https://github.com/simpler-env/SimplerEnv) to install the base `simpler_env` environment. 
+To set up the environment, please first follow the official [SimplerEnv repository](https://github.com/simpler-env/SimplerEnv) to install the base `simpler_env` environment.
 
-Afterwards, inside the `simpler_env` environment, install the following dependencies:  
+Afterwards, inside the `simpler_env` environment, install the following dependencies:
 
 ```bash
 conda activate simpler_env
@@ -30,7 +30,7 @@ You can refer to this link to fix: [Installation Guide – Vulkan Section](https
 We provide a minimal environment verification script:
 
 ```bash
-python examples/SimplerEnv/test_your_simplerEnv.py
+python examples/SimplerEnv/eval_files/test_your_simplerEnv.py
 ```
 
 If you see the "✅ Env built successfully" message, it means SimplerEnv is installed correctly and ready to use.
@@ -41,10 +41,10 @@ If you see the "✅ Env built successfully" message, it means SimplerEnv is inst
 
 ## 🚀 2. Eval SimplerEnv
 
-The evaluation should be run **from the repository root** using **two separate terminals/machines**, one for each environment:  
+The evaluation should be run **from the repository root** using **two separate terminals/machines**, one for each environment:
 
-- **starVLA environment**: runs the policy inference server.  
-- **simpler_env environment**: runs the simulation eval code.  
+- **starVLA environment**: runs the policy inference server.
+- **simpler_env environment**: runs the simulation eval code.
 
 
 ### Step 0. Download offical checkpoint
@@ -55,30 +55,30 @@ The evaluation should be run **from the repository root** using **two separate t
 
 ### Step 1. Start the server (starVLA environment)
 
-In the first terminal, activate the `starVLA` conda environment and run:  
+In the first terminal, activate the `starVLA` conda environment and run:
 
 ```bash
 bash examples/SimplerEnv/eval_files/run_policy_server.sh
 ```
 
-⚠️ **Note:** Please ensure that you specify the correct checkpoint path in  
-`run_policy_server.sh`  
+⚠️ **Note:** Please ensure that you specify the correct checkpoint path in
+`run_policy_server.sh`
 
 ---
 
 
 ### Step 2. Start the simulation (simpler_env environment)
 
-In the second terminal, activate the `simpler_env` conda environment and run:  
+In the second terminal, activate the `simpler_env` conda environment and run:
 
 ```bash
 export MODEL_PATH=.../checkpoints/steps_50000_pytorch_model.pt # for read normonization json and get name to save video under ckpt dir
-bash examples/SimplerEnv/start_simpler_env.sh ${MODEL_PATH} 
+bash examples/SimplerEnv/start_simpler_env.sh ${MODEL_PATH}
 ```
 This script will automatically launch the WidowX Robot evaluation tasks, reproducing the benchmark results reported above.
 
-⚠️ **Note:** Please ensure that you specify the correct `SimplerEnv_PATH`in 
-`start_simpler_env.sh`  
+⚠️ **Note:** Please ensure that you specify the correct `SimplerEnv_PATH`in
+`start_simpler_env.sh`
 
 
 ⚠️ **Common Issues**
@@ -93,7 +93,7 @@ When run policy server but `NotImplementedError:Framework QwenGR00T is not imple
 
 
 Steps:
-1) Download a LeRobot-format OXE dataset 
+1) Download a LeRobot-format OXE dataset
 - [bridge_orig_lerobot](https://huggingface.co/datasets/IPEC-COMMUNITY/bridge_orig_lerobot)
 - [fractal20220817_data_lerobot](https://huggingface.co/datasets/IPEC-COMMUNITY/fractal20220817_data_lerobot)
 

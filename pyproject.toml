@@ -64,6 +64,8 @@ dependencies = [
     "libero",
     "debugpy>=1.8.19",
     "ipdb>=0.13.13",
+    "mediapy>=1.2.5",
+    "msgpack>=1.1.2",
 ]
 
 [project.optional-dependencies]

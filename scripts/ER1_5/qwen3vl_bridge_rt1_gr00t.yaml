@@ -2,7 +2,7 @@ run_id: qwen3vl_bridge_rt1_gr00t
 run_root_dir: results/Checkpoints
 seed: 42
 trackers: [jsonl, wandb]
-wandb_entity: xiguapi
+wandb_entity: lookas
 wandb_project: Qwen3VL_Bridge_RT1_GR00T
 is_debug: false
 

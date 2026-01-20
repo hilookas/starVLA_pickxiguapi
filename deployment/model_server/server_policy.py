@@ -19,10 +19,6 @@ def main(args) -> None:
         vla = vla.to(torch.bfloat16)
     vla = vla.to("cuda").eval()
 
-    hostname = socket.gethostname()
-    local_ip = socket.gethostbyname(hostname)
-    logging.info("Creating server (host: %s, ip: %s)", hostname, local_ip)
-
     # start websocket server
     server = WebsocketPolicyServer(
         policy=vla,
